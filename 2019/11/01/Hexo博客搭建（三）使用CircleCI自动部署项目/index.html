@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>使用CircleCI自动部署项目 | Point&#39;s Blog</title>
+  <meta name="keywords" content=" hexo ">
+  <meta name="description" content="使用CircleCI自动部署项目 | Point&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="About MeThis is Point.  Try my best to be a better point.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Point&#39;s Blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;pointtang.github.io&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="Point&#39;s Blog">
+<meta property="og:description" content="About MeThis is Point.  Try my best to be a better point.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-13T10:48:39.082Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/pnt.ico">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/github-gist.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/gif2.gif" />
+</a>
+<div class="author">
+    <span>Point Tang</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(10)</small></div></li>
+    
+        
+            
+            <li><div data-rel="tip">tip<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="guide">guide<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="util">util<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    </div>
+    <div><a class="about  site_url"  href="/about">关于</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="10">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color3">Android</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color4">PHP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color5">Java</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="tip "
+           href="/2019/12/13/Android%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android碎片知识">Android碎片知识</span>
+            <span class="post-date" title="2019-12-13 18:32:00">2019/12/13</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2018/05/21/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="Hexo博客搭建（一）">Hexo博客搭建（一）</span>
+            <span class="post-date" title="2018-05-21 16:08:33">2018/05/21</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/12/13/Git%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git使用问题记录">Git使用问题记录</span>
+            <span class="post-date" title="2019-12-13 18:26:40">2019/12/13</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/11/01/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89%E4%BD%BF%E7%94%A8CircleCI%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="使用CircleCI自动部署项目">使用CircleCI自动部署项目</span>
+            <span class="post-date" title="2019-11-01 17:46:50">2019/11/01</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/08/02/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%8C%EF%BC%89/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="Hexo博客搭建（二）">Hexo博客搭建（二）</span>
+            <span class="post-date" title="2019-08-02 16:53:28">2019/08/02</span>
+        </a>
+        
+        <a  class="tip "
+           href="/2018/07/31/PHP%EF%BC%88%E4%B8%80%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%B0%E5%BD%95/"
+           data-tag="PHP"
+           data-author="" >
+            <span class="post-title" title="PHP（一）字符串记录">PHP（一）字符串记录</span>
+            <span class="post-date" title="2018-07-31 16:37:47">2018/07/31</span>
+        </a>
+        
+        <a  class="tip "
+           href="/2019/09/12/PHP%EF%BC%88%E4%BA%8C%EF%BC%89%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%BA%93/"
+           data-tag="PHP,SQL"
+           data-author="" >
+            <span class="post-title" title="PHP（二）时间日期及数据库">PHP（二）时间日期及数据库</span>
+            <span class="post-date" title="2019-09-12 16:57:37">2019/09/12</span>
+        </a>
+        
+        <a  class="tip "
+           href="/2018/05/29/SQL%E8%AF%AD%E5%8F%A5%E8%AE%B0%E5%BD%95/"
+           data-tag="SQL"
+           data-author="" >
+            <span class="post-title" title="SQL语句记录">SQL语句记录</span>
+            <span class="post-date" title="2018-05-29 15:21:39">2018/05/29</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/12/13/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2019-12-13 10:48:39">2019/12/13</span>
+        </a>
+        
+        <a  class="util "
+           href="/2019/01/07/%E6%97%B6%E9%97%B4%E3%80%81%E6%97%B6%E5%8C%BA%E3%80%81%E6%97%B6%E9%97%B4%E6%88%B3/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="时间、时区、时间戳">时间、时区、时间戳</span>
+            <span class="post-date" title="2019-01-07 18:51:40">2019/01/07</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Hexo博客搭建（三）使用CircleCI自动部署项目" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">使用CircleCI自动部署项目</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" target="_blank" data-rel="guide noopener">guide</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" target="_blank" rel="noopener" class="color5">hexo</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-12-13 10:48:39'>2019-11-01 17:46</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇介绍如何使用CircleCI自动部署博客到Github。</p>
+<a id="more"></a>
+
+<p>有一天我需要更换电脑。然后我发现我github上的博客没有保存源码，只保存了自动生成的工程。</p>
+<p>而且我想了想，我的博客部署一次好麻烦啊。</p>
+<p>然后，在同事的帮助下，我尝试了Travis-CI和Circle CI，结果，Circle CI成功了。Travis-CI有一个坑爹的加密一直搞不对。</p>
+<p>接下来，我只记录一下这个成功案例。</p>
+<p>github新建一个blog仓库来放源文件。原来的pointtang.github.io用来放网页。</p>
+<p>把旧电脑上的博客源码拷过来，新电脑上排排装环境，然后提交到blog仓库去。</p>
+<p>发现的第一个问题：</p>
+<p>我在新电脑上移动了一次目录，结果是本地的不能运行了。</p>
+<p>我知道是node js里面什么东西依然在往我旧目录放，但是我找不到在哪里设置。</p>
+<p>然后，卸载重装node js。电脑用户目录/AppData/Romaing/npm两个都删掉。博客项目根目录下的node_modules删掉。</p>
+<p>重新走npm install流程。</p>
+<p>发现的第二个问题：</p>
+<p>提交后theme是空的。github仓库里，这个空的文件夹和默认的landscape图标都不一样。</p>
+<p>这玩意是一个submodule，但是由于我原来是旧版本的git，用git clone命令加进去的主题，submodule就不正常了。</p>
+<p>我找到了怎么解除submodule。</p>
+<p>先把主题底下的_config.yml保存起来。</p>
+<p>然后在github上，fork一个主题工程，分支什么的改好。</p>
+<p>然后在本地解除错的submodule。先把他找出来，看看在不在。</p>
+<pre><code>$ git ls-files --stage | grep 16000</code></pre><p>这个命令可以列出来所有的submodule。如果有一行themes/3-hexo，那就是旧的，错的。然后先把它删掉。</p>
+<pre><code>$ git rm --cached themes/3-hexo</code></pre><p>下一步，用submodule来管理。</p>
+<pre><code>$ git submodule add https://github.com/PointTang/hexo-theme-3-hexo.git themes/3-hexo</code></pre><p>再下一步，把主题的yml文件放回去。放到themes/3-hexo目录底下。</p>
+<p>再下一步，cd到themes/3-hexo目录，把这个主题的内容提交一哈。然后push到远程仓库。</p>
+<p>这一步过了，去github上检查，就能看到fork的仓库里最新的提交了。</p>
+<p>再下一步，cd回blog目录，把整个工程提交一哈，这样关联的submodule就是最新的commit id了。</p>
+<p>然后，开始准备用Circle CI。</p>
+<p>先去操作一下github。</p>
+<p>在右上角Settings -&gt; Develop Settings -&gt; Personal Access Token，新建一个token用来部署。把这个token复制存起来备用。</p>
+<p>勾选repo有关的就好。</p>
+<p>再去操作一下Circle CI。</p>
+<p>先到<a href="https://circleci.com/，右上角有一个Go" target="_blank" rel="noopener">https://circleci.com/，右上角有一个Go</a> to app的，用github账号登录。</p>
+<p>然后关联一下blog工程。</p>
+<p>左边第一个选Jobs，然后看到blog旁边有一个设置按钮，点进去，翻到环境变量Environment Variables，把这几个配上：</p>
+<ol>
+<li>GH_EMAIL 填github的邮箱</li>
+<li>GH_USER  填github的用户名</li>
+<li>GH_REF   填github要作为页面显示的那个项目地址，不带前面的https://</li>
+<li>GH_TOKEN 填刚刚生成的token</li>
+</ol>
+<p>再写一下本地工程里的Circle CI脚本。</p>
+<p>工程根目录建一个文件夹，名字是.circleci，文件夹里面有一个文件，名字是config.yml。</p>
+<p>文件内容照着抄。</p>
+<pre><code>version: 2
+jobs:
+  generate-page:
+    docker:
+      - image: node:8.11.1
+    steps:
+      - checkout
+      - run:
+          name: 安装hexo
+          command: npm install -g hexo-cli
+      - run:
+          name: 安装依赖
+          command: npm install
+      - run:
+          name:  更新关联
+          command: |
+            echo &quot;submodule init.&quot;
+            git submodule init 
+            echo &quot;submodule update.&quot;
+            git submodule update
+      - run:
+          name:  生成页面
+          command: hexo generate
+      - run:
+          name: 部署Github Pages
+          command: |
+            cd public
+            ls
+            git init
+            git config user.name &quot;$GH_USER&quot;
+            git config user.email &quot;$GH_EMAIL&quot;
+            git add .
+            git commit -m &quot;update&quot;
+            git push --force --quiet &quot;https://$GH_TOKEN@$GH_REF&quot; master
+            echo &#39;deploy success&#39;
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - generate-page:
+          filters:
+            branches:
+              only: master</code></pre><p>写完提交一下。</p>
+<p>然后去CircleCI查看Job，会看到这次提交的自动运行。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 point_1024@163.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>使用CircleCI自动部署项目</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" target="_blank" rel="noopener" title="Point Tang">Point Tang</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-11-01, 17:46:50</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-13, 10:48:39</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/01/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89%E4%BD%BF%E7%94%A8CircleCI%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/" title="使用CircleCI自动部署项目">http://pointtang.github.io/2019/11/01/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89%E4%BD%BF%E7%94%A8CircleCI%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2019 Point</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)" target="_blank" rel="noopener"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#Android','#hexo','#git','#PHP','#SQL','#Java',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PHP（二）时间日期及数据库 | Point&#39;s Blog</title>
+  <meta name="keywords" content=" PHP , SQL ">
+  <meta name="description" content="PHP（二）时间日期及数据库 | Point&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="About MeThis is Point.  Try my best to be a better point.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Point&#39;s Blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;pointtang.github.io&#x2F;about&#x2F;index.html">
+<meta property="og:site_name" content="Point&#39;s Blog">
+<meta property="og:description" content="About MeThis is Point.  Try my best to be a better point.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-13T10:48:39.082Z">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/pnt.ico">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/github-gist.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/gif2.gif" />
+</a>
+<div class="author">
+    <span>Point Tang</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(10)</small></div></li>
+    
+        
+            
+            <li><div data-rel="tip">tip<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="guide">guide<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="util">util<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    </div>
+    <div><a class="about  site_url"  href="/about">关于</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="10">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color3">Android</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color4">git</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color4">PHP</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color4">SQL</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" target="_blank" rel="noopener" class="color5">Java</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="tip "
+           href="/2019/12/13/Android%E7%A2%8E%E7%89%87%E7%9F%A5%E8%AF%86/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android碎片知识">Android碎片知识</span>
+            <span class="post-date" title="2019-12-13 18:32:00">2019/12/13</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2018/05/21/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="Hexo博客搭建（一）">Hexo博客搭建（一）</span>
+            <span class="post-date" title="2018-05-21 16:08:33">2018/05/21</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/12/13/Git%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"
+           data-tag="git"
+           data-author="" >
+            <span class="post-title" title="Git使用问题记录">Git使用问题记录</span>
+            <span class="post-date" title="2019-12-13 18:26:40">2019/12/13</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/11/01/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89%E4%BD%BF%E7%94%A8CircleCI%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="使用CircleCI自动部署项目">使用CircleCI自动部署项目</span>
+            <span class="post-date" title="2019-11-01 17:46:50">2019/11/01</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/08/02/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%8C%EF%BC%89/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="Hexo博客搭建（二）">Hexo博客搭建（二）</span>
+            <span class="post-date" title="2019-08-02 16:53:28">2019/08/02</span>
+        </a>
+        
+        <a  class="tip "
+           href="/2018/07/31/PHP%EF%BC%88%E4%B8%80%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%AE%B0%E5%BD%95/"
+           data-tag="PHP"
+           data-author="" >
+            <span class="post-title" title="PHP（一）字符串记录">PHP（一）字符串记录</span>
+            <span class="post-date" title="2018-07-31 16:37:47">2018/07/31</span>
+        </a>
+        
+        <a  class="tip "
+           href="/2019/09/12/PHP%EF%BC%88%E4%BA%8C%EF%BC%89%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%BA%93/"
+           data-tag="PHP,SQL"
+           data-author="" >
+            <span class="post-title" title="PHP（二）时间日期及数据库">PHP（二）时间日期及数据库</span>
+            <span class="post-date" title="2019-09-12 16:57:37">2019/09/12</span>
+        </a>
+        
+        <a  class="tip "
+           href="/2018/05/29/SQL%E8%AF%AD%E5%8F%A5%E8%AE%B0%E5%BD%95/"
+           data-tag="SQL"
+           data-author="" >
+            <span class="post-title" title="SQL语句记录">SQL语句记录</span>
+            <span class="post-date" title="2018-05-29 15:21:39">2018/05/29</span>
+        </a>
+        
+        <a  class="guide "
+           href="/2019/12/13/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2019-12-13 10:48:39">2019/12/13</span>
+        </a>
+        
+        <a  class="util "
+           href="/2019/01/07/%E6%97%B6%E9%97%B4%E3%80%81%E6%97%B6%E5%8C%BA%E3%80%81%E6%97%B6%E9%97%B4%E6%88%B3/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="时间、时区、时间戳">时间、时区、时间戳</span>
+            <span class="post-date" title="2019-01-07 18:51:40">2019/01/07</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-PHP（二）时间日期及数据库" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">PHP（二）时间日期及数据库</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" target="_blank" data-rel="tip noopener">tip</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" target="_blank" rel="noopener" class="color4">PHP</a>
+            
+            <a href="javascript:" target="_blank" rel="noopener" class="color4">SQL</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-12-13 10:48:39'>2019-09-12 16:57</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是时间戳"><span class="toc-text">什么是时间戳</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#默认时区区别"><span class="toc-text">默认时区区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP获取当前时间戳"><span class="toc-text">PHP获取当前时间戳</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP获取当前日期时间"><span class="toc-text">PHP获取当前日期时间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取当前时间"><span class="toc-text">获取当前时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#获取当前时区的时间"><span class="toc-text">获取当前时区的时间</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL写入时间戳"><span class="toc-text">MySQL写入时间戳</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL读取时间戳"><span class="toc-text">MySQL读取时间戳</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇记录PHP使用过程中用过的时间日期处理和数据库相关代码。</p>
+<a id="more"></a>
+
+<p>PHP的数据库操作参考手册点<a href="https://www.runoob.com/php/php-ref-mysqli.html" target="_blank" rel="noopener" title="PHP 5 数据库MySQLi">这里</a>。</p>
+<p>PHP的时间日期操作参考手册点<a href="https://www.runoob.com/php/php-date.html" target="_blank" rel="noopener" title="PHP时间日期">这里</a>。</p>
+<h1 id="什么是时间戳"><a href="#什么是时间戳" class="headerlink" title="什么是时间戳"></a>什么是时间戳</h1><p>时间戳是一个时区无关的量。</p>
+<p>地球上分为24个时区，每个时区都有各自的时间，但同一时刻所有时区距离某一标准时间的差值是一致的，这个标准差值就是时间戳。</p>
+<p>标准时间一般认为是格林威治时间1970年01月01日00时00分00秒，即0区时间1970-01-01 00:00:00，对应到北京时间是+8区时间1970-01-01 08:00:00。</p>
+<p>PHP和MySQL中的时间戳都是10位，以秒为单位，在部分其他系统中，时间戳是13位，以毫秒为单位。</p>
+<p>时间戳最远表示的时间是2038年，十位时间戳2147483647表示格林威治时间2038-01-19 11:14:07。</p>
+<h1 id="默认时区区别"><a href="#默认时区区别" class="headerlink" title="默认时区区别"></a>默认时区区别</h1><p>PHP的时区默认是0区格林威治标准时区。</p>
+<p>MySQL的时区默认是系统设置时区。</p>
+<h1 id="PHP获取当前时间戳"><a href="#PHP获取当前时间戳" class="headerlink" title="PHP获取当前时间戳"></a>PHP获取当前时间戳</h1><p>PHP使用time()方法获取当前时间戳，适用于PHP 4+。</p>
+<h1 id="PHP获取当前日期时间"><a href="#PHP获取当前日期时间" class="headerlink" title="PHP获取当前日期时间"></a>PHP获取当前日期时间</h1><h2 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h2><p>使用<code>date(&#39;Y-m-d H:m:s&#39;)</code>方法。这个方法拿到的永远是0时区的时间。</p>
+<h2 id="获取当前时区的时间"><a href="#获取当前时区的时间" class="headerlink" title="获取当前时区的时间"></a>获取当前时区的时间</h2><ol>
+<li><p>先设置date环境变量，参考 <a href="https://www.runoob.com/php/func-date-default-timezone-set.html" target="_blank" rel="noopener">date_default_timezone_set()</a> 。<br>设置东八区使用:<code>date_default_timezone_set(&quot;PRC&quot;);</code><br>其中PRC是中华人民共和国（The People’s Republic of China）的简称。</p>
+</li>
+<li><p>再使用date方法获取当前时间：<code>date(&#39;Y-m-d H:i:s&#39;)</code><br>显示格式为<em>2019-09-15 17:45:27</em> </p>
+</li>
+</ol>
+<h1 id="MySQL写入时间戳"><a href="#MySQL写入时间戳" class="headerlink" title="MySQL写入时间戳"></a>MySQL写入时间戳</h1><p>MySQL在建表时把字段类型设置成<em>timestamp</em>，默认值设为<em>CURRENT_TIMESTAMP</em>即可保存时间戳。</p>
+<p>勾选根据当前时间戳更新，则每次更新记录时都会更新时间戳，不勾选，则记录创建时的时间戳。两种情况下建表SQL语句示例如下：</p>
+<pre><code class="sql">CREATE TABLE `t_auth_v0` (
+  `F_MACADDRESS` varchar(12) NOT NULL,
+  `F_INIT_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `F_TIMES` int(4) NOT NULL,
+  PRIMARY KEY (`F_MACADDRESS`)
+)
+
+CREATE TABLE `t_auth_v0` (
+  `F_MACADDRESS` varchar(12) NOT NULL,
+  `F_INIT_TIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `F_TIMES` int(4) NOT NULL,
+  PRIMARY KEY (`F_MACADDRESS`)
+)
+</code></pre>
+<h1 id="MySQL读取时间戳"><a href="#MySQL读取时间戳" class="headerlink" title="MySQL读取时间戳"></a>MySQL读取时间戳</h1><p>MySQL中直接查询timestamp字段时，如果不设置查询Unix时间戳，会按照系统当前时区把存储的timestamp类型转换成可读的时间。时间格式示例： <em>2019-09-11 12:22:23</em> </p>
+<p>示例查询语句：</p>
+<pre><code>SELECT F_MACADDRESS, F_INIT_TIME, F_TIMES FROM t_auth_v0 WHERE F_MACADDRESS=&#39;000000000000&#39;
+SELECT F_MACADDRESS, UNIX_TIMESTAMP(F_INIT_TIME), F_TIMES FROM t_auth_v0 WHERE F_MACADDRESS=&#39;000000000000&#39;</code></pre><p>MySQL在时间戳字段上有<code>UNIX_TIMESTAMP</code>方法和<code>FROM_UNIXTIME</code>方法。由于我们时间戳均为自动生成，此处不再赘述。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 point_1024@163.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>PHP（二）时间日期及数据库</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" target="_blank" rel="noopener" title="Point Tang">Point Tang</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-09-12, 16:57:37</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-13, 10:48:39</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/12/PHP%EF%BC%88%E4%BA%8C%EF%BC%89%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%BA%93/" title="PHP（二）时间日期及数据库">http://pointtang.github.io/2019/09/12/PHP%EF%BC%88%E4%BA%8C%EF%BC%89%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%BA%93/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2018-2019 Point</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)" target="_blank" rel="noopener"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#Android','#hexo','#git','#PHP','#SQL','#Java',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
